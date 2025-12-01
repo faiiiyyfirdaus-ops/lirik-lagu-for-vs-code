@@ -1,0 +1,51 @@
+import time
+import sys
+
+delay_per_huruf = 0.09  
+delay_per_baris = 1.5  
+
+def ketik_per_huruf(teks, delay):
+    for huruf in teks:
+        sys.stdout.write(huruf)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+def tampilkan_transisi(teks="Transition...", titik=5, delay=0.4):
+    print()
+    ketik_per_huruf(f"[{teks}]", 0.07)
+    for _ in range(titik):
+        sys.stdout.write(".")
+        sys.stdout.flush()
+        time.sleep(delay)
+    print("\n")
+    time.sleep(1.2)
+
+def tampilkan_lirik(lirik, default_huruf, default_baris):
+    for baris in lirik:
+        huruf_delay = baris.get("huruf_delay", default_huruf)
+        baris_delay = baris.get("baris_delay", default_baris)
+        ketik_per_huruf(baris["teks"], huruf_delay)
+        time.sleep(baris_delay)
+
+
+lirik_baru = [
+    {"teks": "Singkat kata singkat cerita", "huruf_delay": 0.08, "baris_delay": 0.9},
+    {"teks": "ku berjalan dengannya", "huruf_delay": 0.08, "baris_delay": 1.0},
+    {"teks": "Namun apa yang aku rasa", "huruf_delay": 0.09, "baris_delay": 0.9},
+    {"teks": "oh mungkinkan ini cinta", "huruf_delay": 0.09, "baris_delay": 0.7},
+
+    {"teks": "Dan hatiku bayangkan dirinya", "huruf_delay": 0.09, "baris_delay": 1.7},
+    {"teks": "mulai ada rindu", "huruf_delay": 0.08, "baris_delay": 1.37},
+    {"teks": "Dunia ku terhenti karna kamu", "huruf_delay": 0.09, "baris_delay": 2.5},
+    {"teks": "Mungkin bisa jadi milikku", "huruf_delay": 0.09, "baris_delay": 1.4},
+
+    {"teks": "Semoga lagu cinta ini", "huruf_delay": 0.1, "baris_delay": 0.9},
+    {"teks": "bersarang tepat di hatimu", "huruf_delay": 0.09, "baris_delay": 1.5}
+]
+
+if __name__ == "__main__":
+    print("\n" + "" * 60 + "\n")
+    tampilkan_transisi("12456 Budi Doremi")
+    tampilkan_lirik(lirik_baru, delay_per_huruf, delay_per_baris)
+    print("\n" + "" * 60 + "\n")
