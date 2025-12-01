@@ -1,0 +1,53 @@
+import time
+import sys
+
+delay_per_huruf = 0.09  
+delay_per_baris = 1.5  
+
+def ketik_per_huruf(teks, delay):
+    for huruf in teks:
+        sys.stdout.write(huruf)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+def tampilkan_transisi(teks="Transition...", titik=5, delay=0.4):
+    print()
+    ketik_per_huruf(f"[{teks}]", 0.07)
+    for _ in range(titik):
+        sys.stdout.write(".")
+        sys.stdout.flush()
+        time.sleep(delay)
+    print("\n")
+    time.sleep(1.2)
+
+def tampilkan_lirik(lirik, default_huruf, default_baris):
+    for baris in lirik:
+        huruf_delay = baris.get("huruf_delay", default_huruf)
+        baris_delay = baris.get("baris_delay", default_baris)
+        ketik_per_huruf(baris["teks"], huruf_delay)
+        time.sleep(baris_delay)
+
+
+lirik_baru = [
+    {"teks": "Makes it harder to see", "huruf_delay": 0.08, "baris_delay": 0.5},
+    {"teks": "Underneath", "huruf_delay": 0.07, "baris_delay": 0.6 },
+    {"teks": "Did we ever know?", "huruf_delay": 0.07, "baris_delay": 0.5},
+    {"teks": "Did we ever know?", "huruf_delay": 0.07, "baris_delay": 0.5},
+    {"teks": "Did we ever know?", "huruf_delay": 0.12, "baris_delay": 1.5},
+    {"teks": "Is it all inside of my head?", "huruf_delay": 0.10, "baris_delay": 1.2},
+    {"teks": "Maybe you still think I don't care", "huruf_delay": 0.08, "baris_delay": 1.0},
+    {"teks": "But all I need is you", "huruf_delay": 0.1, "baris_delay": 0.5},
+    {"teks": "Yeah, you know it's true,", "huruf_delay": 0.06, "baris_delay": 0.5},
+    {"teks": "yeah, you know it's true", "huruf_delay": 0.06, "baris_delay": 0.8},
+    {"teks": "Forget about", "huruf_delay": 0.1, "baris_delay": 0.1},
+    {"teks": "where we are", "huruf_delay": 0.17, "baris_delay": 0.6},
+    {"teks": "and let go", "huruf_delay": 0.09, "baris_delay": 0.5},
+    {"teks": "We're so close", "huruf_delay": 0.11, "baris_delay": 0.5}
+]
+
+if __name__ == "__main__":
+    print("\n" + "" * 60 + "\n")
+    tampilkan_transisi("")
+    tampilkan_lirik(lirik_baru, delay_per_huruf, delay_per_baris)
+    print("\n" + "" * 60 + "\n")
